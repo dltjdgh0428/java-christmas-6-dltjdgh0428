@@ -12,7 +12,8 @@ public enum MenuCatalog {
     ICE_CREAM("아이스크림", 5000),
     ZERO_COLA("제로콜라", 3000),
     RED_WINE("레드와인", 60000),
-    CHAMPAGNE("샴페인", 25000);
+    CHAMPAGNE("샴페인", 25000),
+    NONE("None", 0);
 
     private final String name;
     private final int price;
@@ -36,6 +37,6 @@ public enum MenuCatalog {
                 return item;
             }
         }
-        throw new IllegalArgumentException("No constant with text " + text + " found");
+        return NONE;
     }
 }

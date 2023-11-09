@@ -16,7 +16,7 @@ public class InputTest {
         String validInput = "15";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateString(validInput));
+        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(validInput));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class InputTest {
         String invalidInput = "32";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateString(invalidInput));
+        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateFormat(invalidInput));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class InputTest {
         String nonNumericInput = "abc";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateString(nonNumericInput));
+        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateFormat(nonNumericInput));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class InputTest {
         String singleDigitInput = "5";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateString(singleDigitInput));
+        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(singleDigitInput));
     }
 
     @Test
@@ -76,6 +76,6 @@ public class InputTest {
         String leadingZeroInput = "05";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateString(leadingZeroInput));
+        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(leadingZeroInput));
     }
 }

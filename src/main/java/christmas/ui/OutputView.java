@@ -3,6 +3,7 @@ package christmas.ui;
 import christmas.contents.Prompts;
 
 public class OutputView {
+
     public void printWelcomeMessage() {
         System.out.println(Prompts.WELCOME_MESSAGE.getMessage());
     }
