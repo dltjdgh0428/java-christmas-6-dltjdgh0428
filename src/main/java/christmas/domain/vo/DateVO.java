@@ -1,2 +1,4 @@
-package christmas.domain.vo;public class InputDateVO {
+package christmas.domain.vo;
+
+public class DateVO {
 }

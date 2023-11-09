@@ -1,2 +1,4 @@
-package christmas.utils;public class ParserUtil {
+package christmas.utils;
+
+public class ParserUtil {
 }

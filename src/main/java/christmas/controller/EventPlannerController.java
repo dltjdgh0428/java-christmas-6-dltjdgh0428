@@ -1,2 +1,4 @@
-package christmas.controller;public class EventPlannerController {
+package christmas.controller;
+
+public class EventPlannerController {
 }

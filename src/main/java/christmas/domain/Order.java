@@ -1,2 +1,4 @@
-package christmas.domain;public class Order {
+package christmas.domain;
+
+public class Order {
 }

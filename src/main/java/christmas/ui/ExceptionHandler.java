@@ -1,2 +1,4 @@
-package christmas.ui;public class ExceptionHandler {
+package christmas.ui;
+
+public class ExceptionHandler {
 }

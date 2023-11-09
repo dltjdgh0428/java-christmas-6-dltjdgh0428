@@ -1,2 +1,4 @@
-package christmas.domain;public class Menu {
+package christmas.domain;
+
+public class Menu {
 }

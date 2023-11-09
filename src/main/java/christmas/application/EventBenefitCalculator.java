@@ -1,2 +1,4 @@
-package christmas.application;public class EventBenefitCalculator {
+package christmas.application;
+
+public class EventBenefitCalculator {
 }
