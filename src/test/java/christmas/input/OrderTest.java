@@ -79,7 +79,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("다양한 메뉴 조합이 정상적으로 처리되어야 함")
-    public void multipleMenuItems() {
+    public void multipleMenuItemsCase_1() {
         // given
         String multipleItemsOrder = "바비큐립-3,아이스크림-2,제로콜라-1";
 

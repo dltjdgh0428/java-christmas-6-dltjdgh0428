@@ -3,7 +3,6 @@ package christmas.domain.vo;
 import christmas.contents.MenuCatalog;
 import christmas.utils.ParserUtil;
 import christmas.utils.ValidationUtil;
-
 import java.util.Map;
 
 public class OrderVO {

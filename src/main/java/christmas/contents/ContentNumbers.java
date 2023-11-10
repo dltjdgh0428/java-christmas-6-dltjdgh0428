@@ -8,7 +8,14 @@ public enum ContentNumbers {
     MENU_QUANTITY_INDEX(1),
     ORDER_PARTS_COUNT(2),
     MIN_QUANTITY(1),
-    MAX_QUANTITY(20);
+    MAX_QUANTITY(20),
+    YEAR(2023),
+    MONTH(12),
+    WEEK(7),
+    CORRECT_SUNDAY(1),
+    START_DAY_OF_MONTH(1),
+    CHRISTMAS_DAY(25),
+    MAX_DISCOUNT_DAY(25);
 
     private final int value;
 
