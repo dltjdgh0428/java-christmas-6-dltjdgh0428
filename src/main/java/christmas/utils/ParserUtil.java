@@ -25,10 +25,11 @@ public class ParserUtil {
                 .map(parts -> new AbstractMap.SimpleEntry<>(
                         MenuCatalog.fromString(parts[MENU_NAME_INDEX.getValue()].trim()),
                         Integer.parseInt(parts[MENU_QUANTITY_INDEX.getValue()].trim())))
+                .collect(Collectors.toList())
+                .stream()
                 .collect(Collectors.toMap(
                         AbstractMap.SimpleEntry::getKey,
                         AbstractMap.SimpleEntry::getValue,
-                        Integer::sum,
-                        LinkedHashMap::new));
+                        (a, b) -> a));
     }
 }

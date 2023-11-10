@@ -1,13 +1,13 @@
-package christmas;
+package christmas.input;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import christmas.utils.ValidationUtil;
+import christmas.domain.vo.DateVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class InputTest {
+public class DateTest {
 
     @Test
     @DisplayName("유효한 날짜 문자열은 예외를 발생시키지 않아야 함")
@@ -16,7 +16,7 @@ public class InputTest {
         String validInput = "15";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(validInput));
+        assertDoesNotThrow(() -> new DateVO(validInput));
     }
 
     @Test
@@ -26,27 +26,7 @@ public class InputTest {
         String invalidInput = "32";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateFormat(invalidInput));
-    }
-
-    @Test
-    @DisplayName("유효한 날짜 정수는 예외를 발생시키지 않아야 함")
-    public void validDateInteger() {
-        // given
-        int validDate = 15;
-
-        // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDate(validDate));
-    }
-
-    @Test
-    @DisplayName("유효하지 않은 날짜 정수는 예외를 발생시켜야 함")
-    public void invalidDateInteger() {
-        // given
-        int invalidDate = 32;
-
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDate(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new DateVO(invalidInput));
     }
 
     @Test
@@ -56,7 +36,7 @@ public class InputTest {
         String nonNumericInput = "abc";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> ValidationUtil.validateDateFormat(nonNumericInput));
+        assertThrows(IllegalArgumentException.class, () -> new DateVO(nonNumericInput));
     }
 
     @Test
@@ -66,7 +46,7 @@ public class InputTest {
         String singleDigitInput = "5";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(singleDigitInput));
+        assertDoesNotThrow(() -> new DateVO(singleDigitInput));
     }
 
     @Test
@@ -76,6 +56,6 @@ public class InputTest {
         String leadingZeroInput = "05";
 
         // when & then
-        assertDoesNotThrow(() -> ValidationUtil.validateDateFormat(leadingZeroInput));
+        assertDoesNotThrow(() -> new DateVO(leadingZeroInput));
     }
 }

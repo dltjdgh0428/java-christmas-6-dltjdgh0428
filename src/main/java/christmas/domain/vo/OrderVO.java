@@ -10,9 +10,9 @@ public class OrderVO {
     private Map<MenuCatalog, Integer> orderItems;
 
     public OrderVO(String orderInput) {
-        ValidationUtil.validateOrderFormat(orderInput);
+        ValidationUtil.validateOrderBeforeParse(orderInput);
         this.orderItems = ParserUtil.parseOrder(orderInput);
-        ValidationUtil.validateOrder(this.orderItems);
+        ValidationUtil.validateOrderAfterParse(this.orderItems);
     }
 
     public Map<MenuCatalog, Integer> getOrder() {

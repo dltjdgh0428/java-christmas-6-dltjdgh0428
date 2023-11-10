@@ -7,9 +7,9 @@ public class DateVO {
     private final int day;
 
     public DateVO(String inputDate) {
-        ValidationUtil.validateDateFormat(inputDate);
+        ValidationUtil.validateDateBeforeParse(inputDate);
         this.day = ParserUtil.parseDate(inputDate);
-        ValidationUtil.validateDate(this.day);
+        ValidationUtil.validateDateAfterParse(this.day);
     }
 
     public int getDate() {
