@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class DateTest {
 
     @Test
-    @DisplayName("유효한 날짜 문자열은 예외를 발생시키지 않아야 함")
+    @DisplayName("유효한 날짜 문자열은 정상 처리")
     public void validDateString() {
         // given
         String validInput = "15";
@@ -20,7 +20,7 @@ public class DateTest {
     }
 
     @Test
-    @DisplayName("유효하지 않은 날짜 문자열은 예외를 발생시켜야 함")
+    @DisplayName("유효하지 않은 날짜 문자열은 예외 발생")
     public void invalidDateString() {
         // given
         String invalidInput = "32";
@@ -30,7 +30,7 @@ public class DateTest {
     }
 
     @Test
-    @DisplayName("숫자가 아닌 문자열은 예외를 발생시켜야 함")
+    @DisplayName("숫자가 아닌 문자열은 예외 발생")
     public void nonNumericDateString() {
         // given
         String nonNumericInput = "abc";
@@ -40,7 +40,7 @@ public class DateTest {
     }
 
     @Test
-    @DisplayName("유효한 한 자리 날짜 문자열은 예외를 발생시키지 않아야 함")
+    @DisplayName("유효한 한 자리 날짜 문자열은 정상 처리")
     public void singleDigitDateString() {
         // given
         String singleDigitInput = "5";
@@ -50,7 +50,7 @@ public class DateTest {
     }
 
     @Test
-    @DisplayName("앞에 0이 붙은 날짜 문자열도 유효해야 함")
+    @DisplayName("앞에 0이 붙은 날짜 문자열도 유효")
     public void leadingZeroDateString() {
         // given
         String leadingZeroInput = "05";

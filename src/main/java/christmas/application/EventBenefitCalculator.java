@@ -11,6 +11,10 @@ public class EventBenefitCalculator {
     public static int calculateTotalDiscount(Order order, int day) {
         int totalBeforeDiscount = calculateTotalBeforeDiscount(order);
 
+        if (totalBeforeDiscount < MINIMUM_ORDER_AMOUNT_FOR_DISCOUNTS.getAmount()) {
+            return NO_DISCOUNT.getAmount();
+        }
+
         int totalDiscount = calculateWeekdayDiscount(order, day)
                 + calculateWeekendDiscount(order, day)
                 + calculateSpecialDiscount(order, day)
@@ -40,14 +44,14 @@ public class EventBenefitCalculator {
                 .sum();
     }
 
-    public static int calculateSpecialDiscount(Order order,int day) {
-        if (DateUtil.isSpecialDiscountDay(day) || isEligibleForDiscount(order) ) {
+    public static int calculateSpecialDiscount(Order order, int day) {
+        if (DateUtil.isSpecialDiscountDay(day) || isEligibleForDiscount(order)) {
             return SPECIAL_DISCOUNT_AMOUNT.getAmount();
         }
         return NO_DISCOUNT.getAmount();
     }
 
-    public static int calculateChristmasDayDiscount(Order order,int day) {
+    public static int calculateChristmasDayDiscount(Order order, int day) {
         if (day > MAX_DISCOUNT_DAY.getValue() || !isEligibleForDiscount(order)) {
             return NO_DISCOUNT.getAmount();
         }
