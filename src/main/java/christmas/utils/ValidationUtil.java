@@ -29,20 +29,22 @@ public class ValidationUtil {
         }
     }
 
-    public static void validateOrderBeforeParse(String inputOrder){
+    public static void validateOrderBeforeParse(String inputOrder) {
         validateOrderFormat(inputOrder);
         validateDuplicateMenu(inputOrder);
+        validateOrderFormat(inputOrder);
     }
 
     private static void validateOrderFormat(String inputOrder) {
         Arrays.stream(inputOrder.split(ITEM_SEPARATOR.getMessage()))
                 .map(item -> item.split(QUANTITY_SEPARATOR.getMessage()))
                 .forEach(parts -> {
-                    if (parts.length != ORDER_PARTS_COUNT.getValue()) {
+                    if (parts.length != ORDER_PARTS_COUNT.getValue() || !isNumeric(parts[1].trim())) {
                         throw new IllegalArgumentException(INVALID_ORDER.getMessage());
                     }
                 });
     }
+
     private static void validateDuplicateMenu(String orderInput) {
         Map<MenuCatalog, Long> menuFrequency = Stream.of(orderInput.split(ITEM_SEPARATOR.getMessage()))
                 .map(item -> item.split(QUANTITY_SEPARATOR.getMessage()))
@@ -61,6 +63,7 @@ public class ValidationUtil {
         validateQuantityRange(orderMap);
         validateDuplicateMenu(orderMap);
         validateDrinksOnlyOrder(orderMap);
+        validateTotalOrderQuantity(orderMap);
     }
 
     private static void validateNonExistentMenu(Map<MenuCatalog, Integer> orderMap) {
@@ -77,6 +80,15 @@ public class ValidationUtil {
         });
     }
 
+
+    public static void validateTotalOrderQuantity(Map<MenuCatalog, Integer> orderMap) {
+        int totalQuantity = orderMap.values().stream().mapToInt(Integer::intValue).sum();
+        if (totalQuantity > MAX_QUANTITY.getValue()) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+
     private static void validateDuplicateMenu(Map<MenuCatalog, Integer> orderMap) {
         List<MenuCatalog> originalOrderList = new ArrayList<>(orderMap.keySet());
         Set<MenuCatalog> uniqueMenus = new HashSet<>(originalOrderList);
@@ -91,5 +103,17 @@ public class ValidationUtil {
         if (onlyDrinks) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
+    }
+
+    private static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

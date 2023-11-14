@@ -1,7 +1,5 @@
 package christmas.contents;
 
-import static christmas.contents.ContentNumbers.INITIAL_VALUE;
-
 public enum OutputFormat {
     ORDER_MENU_FORMAT("%s %d개"),
     POSITIVE_INT("%,d원"),

@@ -13,11 +13,6 @@ public class DiscountDetails {
     public void addDetail(String detail) {
         details.add(detail);
     }
-
-    public boolean isEmpty() {
-        return details.isEmpty();
-    }
-
     public List<String> getDetails() {
         return new ArrayList<>(details);
     }

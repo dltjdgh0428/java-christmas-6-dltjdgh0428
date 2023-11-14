@@ -4,7 +4,6 @@ import static christmas.contents.ContentNumbers.MAX_DISCOUNT_DAY;
 import static christmas.contents.ContentNumbers.START_DAY_OF_MONTH;
 import static christmas.contents.DiscountAmounts.*;
 
-import christmas.domain.Order;
 import christmas.dto.OrderDTO;
 import christmas.utils.DateUtil;
 

@@ -5,6 +5,8 @@ import christmas.contents.Prompts;
 import christmas.domain.DiscountDetails;
 import christmas.dto.OrderDTO;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class OutputView {
@@ -34,11 +36,12 @@ public class OutputView {
     }
 
     public void printGiftMenu(boolean giftChampagne) {
+        Map<Boolean, String> messageMap = new HashMap<>();
+        messageMap.put(true, Prompts.Champagne.getMessage());
+        messageMap.put(false, Prompts.NOTHING.getMessage());
+
         System.out.println(Prompts.GIFT_MENU.getMessage());
-        String message = Optional.of(giftChampagne)
-                .map(gift -> Prompts.Champagne.getMessage())
-                .orElse(Prompts.NOTHING.getMessage());
-        System.out.println(message);
+        System.out.println(messageMap.get(giftChampagne));
         System.out.println(Prompts.SPACE.getMessage());
     }
 
@@ -69,5 +72,9 @@ public class OutputView {
     public void printEventBadge(String eventBadge) {
         System.out.println(Prompts.EVENT_BADGE.getMessage());
         System.out.println(eventBadge);
+    }
+
+    public static void printError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 }

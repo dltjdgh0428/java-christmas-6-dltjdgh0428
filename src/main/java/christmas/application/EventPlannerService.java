@@ -1,7 +1,6 @@
 package christmas.application;
 
 import static christmas.contents.ContentNumbers.INITIAL_VALUE;
-import static christmas.contents.DiscountAmounts.GIFT_EVENT_THRESHOLD;
 import static christmas.contents.DiscountAmounts.NO_DISCOUNT;
 
 import christmas.domain.DiscountDetails;

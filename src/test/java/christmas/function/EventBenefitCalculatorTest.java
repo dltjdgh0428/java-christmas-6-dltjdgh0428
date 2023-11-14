@@ -38,7 +38,7 @@ public class EventBenefitCalculatorTest {
         Order order = new Order();
         order.addItem(MenuCatalog.T_BONE_STEAK, 1); // 55,000원
         OrderDTO orderDTO = createOrderDTO(order);
-        int day = 3; // 주말 일요일
+        int day = 2; // 주말 토요일
 
         // when
         int totalDiscount = EventBenefitCalculator.calculateWeekendDiscount(orderDTO, day);
@@ -140,7 +140,7 @@ public class EventBenefitCalculatorTest {
         Order order = new Order();
         order.addItem(MenuCatalog.T_BONE_STEAK, 1); // 55,000원 (메인 메뉴)
         OrderDTO orderDTO = createOrderDTO(order);
-        int day = 1; // 평일 (월요일)
+        int day = 3; // 평일(일요일)
 
         // when
         int totalDiscount = EventBenefitCalculator.calculateWeekendDiscount(orderDTO, day);
