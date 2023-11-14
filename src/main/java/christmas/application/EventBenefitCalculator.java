@@ -5,61 +5,63 @@ import static christmas.contents.ContentNumbers.START_DAY_OF_MONTH;
 import static christmas.contents.DiscountAmounts.*;
 
 import christmas.domain.Order;
+import christmas.dto.OrderDTO;
 import christmas.utils.DateUtil;
 
 public class EventBenefitCalculator {
-    public static int calculateTotalDiscount(Order order, int day) {
-        int totalBeforeDiscount = calculateTotalBeforeDiscount(order);
+    public static int calculateTotalDiscount(OrderDTO orderDTO, int day) {
+        int totalBeforeDiscount = calculateTotalBeforeDiscount(orderDTO);
 
         if (totalBeforeDiscount < MINIMUM_ORDER_AMOUNT_FOR_DISCOUNTS.getAmount()) {
             return NO_DISCOUNT.getAmount();
         }
 
-        int totalDiscount = calculateWeekdayDiscount(order, day)
-                + calculateWeekendDiscount(order, day)
-                + calculateSpecialDiscount(order, day)
-                + calculateChristmasDayDiscount(order, day)
+        int totalDiscount = calculateWeekdayDiscount(orderDTO, day)
+                + calculateWeekendDiscount(orderDTO, day)
+                + calculateSpecialDiscount(orderDTO, day)
+                + calculateChristmasDayDiscount(orderDTO, day)
                 + calculateGiftEventDiscount(totalBeforeDiscount);
 
         return totalDiscount;
     }
 
-    public static int calculateWeekdayDiscount(Order order, int day) {
-        if (DateUtil.isWeekend(day) || !isEligibleForDiscount(order)) {
+    public static int calculateWeekdayDiscount(OrderDTO orderDTO, int day) {
+        if (DateUtil.isWeekend(day) || !isEligibleForDiscount(orderDTO)) {
             return NO_DISCOUNT.getAmount();
         }
-        return order.getOrderItems().entrySet().stream()
+        return orderDTO.order().entrySet().stream()
                 .filter(entry -> entry.getKey().isDessert())
                 .mapToInt(entry -> WEEKDAY_DISCOUNT_AMOUNT.getAmount() * entry.getValue())
                 .sum();
+
     }
 
-    public static int calculateWeekendDiscount(Order order, int day) {
-        if (!DateUtil.isWeekend(day) || !isEligibleForDiscount(order)) {
+    public static int calculateWeekendDiscount(OrderDTO orderDTO, int day) {
+        if (!DateUtil.isWeekend(day) || !isEligibleForDiscount(orderDTO)) {
             return NO_DISCOUNT.getAmount();
         }
-        return order.getOrderItems().entrySet().stream()
+        return orderDTO.order().entrySet().stream()
                 .filter(entry -> entry.getKey().isMain())
                 .mapToInt(entry -> WEEKEND_DISCOUNT_AMOUNT.getAmount() * entry.getValue())
                 .sum();
     }
 
-    public static int calculateSpecialDiscount(Order order, int day) {
-        if (DateUtil.isSpecialDiscountDay(day) || isEligibleForDiscount(order)) {
+    public static int calculateSpecialDiscount(OrderDTO orderDTO, int day) {
+        if (DateUtil.isSpecialDiscountDay(day) || isEligibleForDiscount(orderDTO)) {
             return SPECIAL_DISCOUNT_AMOUNT.getAmount();
         }
         return NO_DISCOUNT.getAmount();
     }
 
-    public static int calculateChristmasDayDiscount(Order order, int day) {
-        if (day > MAX_DISCOUNT_DAY.getValue() || !isEligibleForDiscount(order)) {
+    public static int calculateChristmasDayDiscount(OrderDTO orderDTO, int day) {
+        if (day > MAX_DISCOUNT_DAY.getValue() || !isEligibleForDiscount(orderDTO)) {
             return NO_DISCOUNT.getAmount();
         }
         return INITIAL_CHRISTMAS_DAY_DISCOUNT.getAmount() + (day - START_DAY_OF_MONTH.getValue()) * DAILY_INCREMENT.getAmount();
     }
 
-    public static int calculateTotalBeforeDiscount(Order order) {
-        return order.getOrderItems().entrySet().stream()
+    public static int calculateTotalBeforeDiscount(OrderDTO orderDTO) {
+        return orderDTO.order().entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
@@ -71,8 +73,15 @@ public class EventBenefitCalculator {
         return NO_DISCOUNT.getAmount();
     }
 
-    private static boolean isEligibleForDiscount(Order order) {
-        int totalBeforeDiscount = calculateTotalBeforeDiscount(order);
+    public static boolean calculateGiftEvent(OrderDTO orderDTO){
+        if(calculateTotalBeforeDiscount(orderDTO) >= GIFT_EVENT_THRESHOLD.getAmount()){
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isEligibleForDiscount(OrderDTO orderDTO) {
+        int totalBeforeDiscount = calculateTotalBeforeDiscount(orderDTO);
         return totalBeforeDiscount >= MINIMUM_ORDER_AMOUNT_FOR_DISCOUNTS.getAmount();
     }
 }

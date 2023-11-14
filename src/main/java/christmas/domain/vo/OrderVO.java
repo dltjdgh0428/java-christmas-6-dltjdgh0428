@@ -13,8 +13,7 @@ public class OrderVO {
         this.orderItems = ParserUtil.parseOrder(orderInput);
         ValidationUtil.validateOrderAfterParse(this.orderItems);
     }
-
-    public Map<MenuCatalog, Integer> getOrder() {
+    public Map<MenuCatalog, Integer> getOrderItems() {
         return orderItems;
     }
 }

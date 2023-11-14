@@ -70,11 +70,11 @@ public class OrderTest {
 
         // then
         assertNotNull(order);
-        assertEquals(2, order.getOrder().size());
-        assertTrue(order.getOrder().containsKey(MenuCatalog.TAPAS));
-        assertTrue(order.getOrder().containsKey(MenuCatalog.T_BONE_STEAK));
-        assertEquals(2, (int) order.getOrder().get(MenuCatalog.TAPAS));
-        assertEquals(1, (int) order.getOrder().get(MenuCatalog.T_BONE_STEAK));
+        assertEquals(2, order.getOrderItems().size());
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.TAPAS));
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.T_BONE_STEAK));
+        assertEquals(2, (int) order.getOrderItems().get(MenuCatalog.TAPAS));
+        assertEquals(1, (int) order.getOrderItems().get(MenuCatalog.T_BONE_STEAK));
     }
 
     @Test
@@ -88,8 +88,8 @@ public class OrderTest {
 
         // then
         assertNotNull(order);
-        assertEquals(3, order.getOrder().size());
-        assertTrue(order.getOrder().containsKey(MenuCatalog.BBQ_RIBS));
+        assertEquals(3, order.getOrderItems().size());
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.BBQ_RIBS));
     }
 
     @Test
@@ -103,9 +103,9 @@ public class OrderTest {
 
         // then
         assertNotNull(order);
-        assertEquals(1, order.getOrder().size());
-        assertTrue(order.getOrder().containsKey(MenuCatalog.CHOCOLATE_CAKE));
-        assertEquals(20, (int) order.getOrder().get(MenuCatalog.CHOCOLATE_CAKE));
+        assertEquals(1, order.getOrderItems().size());
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.CHOCOLATE_CAKE));
+        assertEquals(20, (int) order.getOrderItems().get(MenuCatalog.CHOCOLATE_CAKE));
     }
 
 }
