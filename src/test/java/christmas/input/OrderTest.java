@@ -1,13 +1,31 @@
 package christmas.input;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import christmas.Application;
 import christmas.contents.MenuCatalog;
+import christmas.domain.Date;
 import christmas.domain.vo.OrderVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class OrderTest {
+public class OrderTest extends NsTest {
+
+    @Test
+    @DisplayName("Domain 날짜 객체 생성 및 값 반환 테스트")
+    void createDateAndReturnValue() {
+        // given
+        int testDay = 15;
+
+        // when
+        Date date = new Date(testDay);
+
+        // then
+        assertEquals(testDay, date.getDay());
+    }
 
     @Test
     @DisplayName("유효하지 않은 주문 형식은 예외 발생")
@@ -107,5 +125,66 @@ public class OrderTest {
         assertTrue(order.getOrderItems().containsKey(MenuCatalog.CHOCOLATE_CAKE));
         assertEquals(20, (int) order.getOrderItems().get(MenuCatalog.CHOCOLATE_CAKE));
     }
+
+    @Test
+    @DisplayName("복합 최대 주문 수량 정상적으로 처리")
+    public void multipleMenuMaxQuantityOrder() {
+        // given
+        String maxQuantityOrder = "초코케이크-7,레드와인-7,티본스테이크-6";
+
+        // when
+        OrderVO order = new OrderVO(maxQuantityOrder);
+
+        // then
+        assertNotNull(order);
+        assertEquals(3, order.getOrderItems().size());
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.CHOCOLATE_CAKE));
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.RED_WINE));
+        assertTrue(order.getOrderItems().containsKey(MenuCatalog.T_BONE_STEAK));
+        assertEquals(7, (int) order.getOrderItems().get(MenuCatalog.CHOCOLATE_CAKE));
+        assertEquals(7, (int) order.getOrderItems().get(MenuCatalog.RED_WINE));
+        assertEquals(6, (int) order.getOrderItems().get(MenuCatalog.T_BONE_STEAK));
+    }
+
+    @Test
+    @DisplayName("음료만 주문했을때 예외 처리 출력 확인")
+    void drinksOnlyOrderExceptionTest() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-3");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 입력 예외 처리 출력 확인1")
+    void invalidInputFormatExceptionTest_1() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라_3");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    @DisplayName("초과 입력 예외 처리 출력 확인")
+    void orderQuantityExceededExceptionTest() {
+        assertSimpleTest(() -> {
+            runException("3", "티본스테이크-30");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 입력 예외 처리 출력 확인2")
+    void invalidInputFormatExceptionTest_2() {
+        assertSimpleTest(() -> {
+            runException("3", "티본스테이크--3");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Override
+    protected void runMain() {
+        Application.main(new String[]{});
+    }
+
 
 }

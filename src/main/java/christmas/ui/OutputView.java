@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class OutputView {
-
     public void printWelcomeMessage() {
         System.out.println(Prompts.WELCOME_MESSAGE.getMessage());
     }

@@ -8,7 +8,6 @@ import static christmas.contents.Prompts.QUANTITY_SEPARATOR;
 
 import christmas.contents.MenuCatalog;
 import java.util.AbstractMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

@@ -10,13 +10,13 @@ import christmas.domain.vo.DateVO;
 import christmas.domain.vo.OrderVO;
 import christmas.dto.DateDTO;
 import christmas.dto.OrderDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 
 public class EventPlannerService {
-
     private List<Integer> calculateDiscountAmounts(OrderDTO orderDTO, int day) {
         List<Integer> discountAmounts = new ArrayList<>();
         int totalBeforeDiscount = EventBenefitCalculator.calculateTotalBeforeDiscount(orderDTO);
@@ -48,14 +48,16 @@ public class EventPlannerService {
 
         return discountDetails;
     }
-    public boolean determineGiftEvent(OrderDTO orderDTO){
-        if(EventBenefitCalculator.calculateGiftEvent(orderDTO)){
+
+    public boolean determineGiftEvent(OrderDTO orderDTO) {
+        if (EventBenefitCalculator.calculateGiftEvent(orderDTO)) {
             return true;
         }
         return false;
     }
+
     public String determineEventBadge(OrderDTO orderDTO, int day) {
-        int totalDiscount = EventBenefitCalculator.calculateTotalDiscount(orderDTO, day);
+        int totalDiscount = EventBenefitCalculator.calculateTotalBenefit(orderDTO, day);
         return EventBadge.getBadgeByAmount(totalDiscount);
     }
 
@@ -64,16 +66,19 @@ public class EventPlannerService {
         int totalDiscount = EventBenefitCalculator.calculateTotalDiscount(orderDTO, day);
         return totalBeforeDiscount - totalDiscount;
     }
-    public int totalDiscount(OrderDTO orderDTO, int day){
-        return EventBenefitCalculator.calculateTotalDiscount(orderDTO, day);
-    }
-    public int totalBeforeDiscount(OrderDTO orderDTO){
+
+    public int totalBeforeDiscount(OrderDTO orderDTO) {
         return EventBenefitCalculator.calculateTotalBeforeDiscount(orderDTO);
+    }
+
+    public int calculateTotalBenefit(OrderDTO orderDTO, int day) {
+        return EventBenefitCalculator.calculateTotalBenefit(orderDTO, day);
     }
 
     public DateDTO convertToDateDto(DateVO date) {
         return new DateDTO(date.getDate());
     }
+
     public OrderDTO convertToOrderDTO(OrderVO order) {
         return new OrderDTO(order.getOrderItems());
     }

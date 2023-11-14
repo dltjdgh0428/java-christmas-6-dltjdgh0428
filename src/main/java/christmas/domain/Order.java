@@ -20,5 +20,4 @@ public class Order {
     public Map<MenuCatalog, Integer> getOrderItems() {
         return orderItems;
     }
-
 }

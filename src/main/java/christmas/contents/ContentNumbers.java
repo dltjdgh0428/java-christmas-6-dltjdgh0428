@@ -12,7 +12,7 @@ public enum ContentNumbers {
     YEAR(2023),
     MONTH(12),
     WEEK(7),
-    CORRECT_SUNDAY(1),
+    CORRECT_SUNDAY(3),
     START_DAY_OF_MONTH(1),
     CHRISTMAS_DAY(25),
     MAX_DISCOUNT_DAY(25);

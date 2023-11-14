@@ -149,5 +149,4 @@ public class EventBenefitCalculatorTest {
         assertEquals(0, totalDiscount);
     }
 
-
 }

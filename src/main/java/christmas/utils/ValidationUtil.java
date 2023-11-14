@@ -1,14 +1,23 @@
 package christmas.utils;
 
-import static christmas.contents.ContentNumbers.*;
-import static christmas.contents.ErrorMessages.*;
+import static christmas.contents.ContentNumbers.MAX_QUANTITY;
+import static christmas.contents.ContentNumbers.MENU_NAME_INDEX;
+import static christmas.contents.ContentNumbers.MIN_QUANTITY;
+import static christmas.contents.ContentNumbers.ORDER_PARTS_COUNT;
+import static christmas.contents.ErrorMessages.INVALID_DATE;
+import static christmas.contents.ErrorMessages.INVALID_ORDER;
 import static christmas.contents.Prompts.ITEM_SEPARATOR;
 import static christmas.contents.Prompts.QUANTITY_SEPARATOR;
 
 import christmas.contents.ContentNumbers;
 import christmas.contents.MenuCatalog;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -99,16 +108,13 @@ public class ValidationUtil {
 
     private static void validateDrinksOnlyOrder(Map<MenuCatalog, Integer> orderMap) {
         boolean onlyDrinks = orderMap.keySet().stream()
-                .allMatch(item -> item == MenuCatalog.ZERO_COLA || item == MenuCatalog.RED_WINE || item == MenuCatalog.CHAMPAGNE);
+                .allMatch(MenuCatalog::isDrink);
         if (onlyDrinks) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
     private static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
         try {
             Integer.parseInt(strNum);
         } catch (NumberFormatException nfe) {

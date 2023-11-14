@@ -36,7 +36,7 @@ public class EventPlannerController {
         outputView.printTotalOrderAmountBeforeDiscount(eventPlannerService.totalBeforeDiscount(orderDTO));
         outputView.printGiftMenu(eventPlannerService.determineGiftEvent(orderDTO));
         outputView.printBenefitDetails(eventPlannerService.calculateDiscountDetails(orderDTO, dateDTO.day()));
-        outputView.printTotalBenefitAmount(eventPlannerService.totalDiscount(orderDTO, dateDTO.day()));
+        outputView.printTotalBenefitAmount(eventPlannerService.calculateTotalBenefit(orderDTO, dateDTO.day()));
         outputView.printExpectedPaymentAfterDiscount(eventPlannerService.calculateFinalAmount(orderDTO, dateDTO.day()));
         outputView.printEventBadge(eventPlannerService.determineEventBadge(orderDTO, dateDTO.day()));
     }

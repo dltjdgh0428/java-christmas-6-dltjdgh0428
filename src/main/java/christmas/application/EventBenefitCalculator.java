@@ -2,7 +2,15 @@ package christmas.application;
 
 import static christmas.contents.ContentNumbers.MAX_DISCOUNT_DAY;
 import static christmas.contents.ContentNumbers.START_DAY_OF_MONTH;
-import static christmas.contents.DiscountAmounts.*;
+import static christmas.contents.DiscountAmounts.DAILY_INCREMENT;
+import static christmas.contents.DiscountAmounts.GIFT_EVENT_DISCOUNT_AMOUNT;
+import static christmas.contents.DiscountAmounts.GIFT_EVENT_THRESHOLD;
+import static christmas.contents.DiscountAmounts.INITIAL_CHRISTMAS_DAY_DISCOUNT;
+import static christmas.contents.DiscountAmounts.MINIMUM_ORDER_AMOUNT_FOR_DISCOUNTS;
+import static christmas.contents.DiscountAmounts.NO_DISCOUNT;
+import static christmas.contents.DiscountAmounts.SPECIAL_DISCOUNT_AMOUNT;
+import static christmas.contents.DiscountAmounts.WEEKDAY_DISCOUNT_AMOUNT;
+import static christmas.contents.DiscountAmounts.WEEKEND_DISCOUNT_AMOUNT;
 
 import christmas.dto.OrderDTO;
 import christmas.utils.DateUtil;
@@ -18,10 +26,17 @@ public class EventBenefitCalculator {
         int totalDiscount = calculateWeekdayDiscount(orderDTO, day)
                 + calculateWeekendDiscount(orderDTO, day)
                 + calculateSpecialDiscount(orderDTO, day)
-                + calculateChristmasDayDiscount(orderDTO, day)
-                + calculateGiftEventDiscount(totalBeforeDiscount);
+                + calculateChristmasDayDiscount(orderDTO, day);
 
         return totalDiscount;
+    }
+
+    public static int calculateTotalBenefit(OrderDTO orderDTO, int day){
+        return calculateWeekdayDiscount(orderDTO, day)
+                + calculateWeekendDiscount(orderDTO, day)
+                + calculateSpecialDiscount(orderDTO, day)
+                + calculateChristmasDayDiscount(orderDTO, day)
+                + calculateGiftEventDiscount(calculateTotalBeforeDiscount(orderDTO));
     }
 
     public static int calculateWeekdayDiscount(OrderDTO orderDTO, int day) {

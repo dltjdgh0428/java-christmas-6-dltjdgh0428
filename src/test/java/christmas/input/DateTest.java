@@ -30,8 +30,28 @@ public class DateTest {
     }
 
     @Test
-    @DisplayName("숫자가 아닌 문자열은 예외 발생")
-    public void nonNumericDateString() {
+    @DisplayName("숫자가 아닌 문자열은 예외 발생_1")
+    public void nonNumericDateString_1() {
+        // given
+        String nonNumericInput = "*";
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new DateVO(nonNumericInput));
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자열은 예외 발생_2")
+    public void nonNumericDateString_2() {
+        // given
+        String nonNumericInput = "_2";
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new DateVO(nonNumericInput));
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자열은 예외 발생_3")
+    public void nonNumericDateString_3() {
         // given
         String nonNumericInput = "abc";
 
