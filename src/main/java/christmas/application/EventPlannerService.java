@@ -10,28 +10,33 @@ import christmas.domain.vo.DateVO;
 import christmas.domain.vo.OrderVO;
 import christmas.dto.DateDTO;
 import christmas.dto.OrderDTO;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
 
 public class EventPlannerService {
     private List<Integer> calculateDiscountAmounts(OrderDTO orderDTO, int day) {
-        List<Integer> discountAmounts = new ArrayList<>();
         int totalBeforeDiscount = EventBenefitCalculator.calculateTotalBeforeDiscount(orderDTO);
 
         if (totalBeforeDiscount <= NO_DISCOUNT.getAmount()) {
-            return discountAmounts;
+            return Collections.emptyList();
         }
 
-        discountAmounts.add(EventBenefitCalculator.calculateChristmasDayDiscount(orderDTO, day));//크리스마스
-        discountAmounts.add(EventBenefitCalculator.calculateWeekdayDiscount(orderDTO, day));//평일
-        discountAmounts.add(EventBenefitCalculator.calculateWeekendDiscount(orderDTO, day));//주말
-        discountAmounts.add(EventBenefitCalculator.calculateSpecialDiscount(orderDTO, day));//특별
-        discountAmounts.add(EventBenefitCalculator.calculateGiftEventDiscount(totalBeforeDiscount));//증정
+        return calculateAllDiscounts(orderDTO, day, totalBeforeDiscount);
+    }
 
-        return discountAmounts;
+    private List<Integer> calculateAllDiscounts(OrderDTO orderDTO, int day, int totalBeforeDiscount) {
+        List<Integer> discounts = new ArrayList<>();
+
+        discounts.add(EventBenefitCalculator.calculateChristmasDayDiscount(orderDTO, day));
+        discounts.add(EventBenefitCalculator.calculateWeekdayDiscount(orderDTO, day));
+        discounts.add(EventBenefitCalculator.calculateWeekendDiscount(orderDTO, day));
+        discounts.add(EventBenefitCalculator.calculateSpecialDiscount(orderDTO, day));
+        discounts.add(EventBenefitCalculator.calculateGiftEventDiscount(totalBeforeDiscount));
+
+        return discounts;
     }
 
     public DiscountDetails calculateDiscountDetails(OrderDTO orderDTO, int day) {

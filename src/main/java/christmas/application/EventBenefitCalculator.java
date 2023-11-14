@@ -31,7 +31,7 @@ public class EventBenefitCalculator {
         return totalDiscount;
     }
 
-    public static int calculateTotalBenefit(OrderDTO orderDTO, int day){
+    public static int calculateTotalBenefit(OrderDTO orderDTO, int day) {
         return calculateWeekdayDiscount(orderDTO, day)
                 + calculateWeekendDiscount(orderDTO, day)
                 + calculateSpecialDiscount(orderDTO, day)
@@ -87,8 +87,8 @@ public class EventBenefitCalculator {
         return NO_DISCOUNT.getAmount();
     }
 
-    public static boolean calculateGiftEvent(OrderDTO orderDTO){
-        if(calculateTotalBeforeDiscount(orderDTO) >= GIFT_EVENT_THRESHOLD.getAmount()){
+    public static boolean calculateGiftEvent(OrderDTO orderDTO) {
+        if (calculateTotalBeforeDiscount(orderDTO) >= GIFT_EVENT_THRESHOLD.getAmount()) {
             return true;
         }
         return false;

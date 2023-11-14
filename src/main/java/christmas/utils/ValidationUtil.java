@@ -11,7 +11,6 @@ import static christmas.contents.Prompts.QUANTITY_SEPARATOR;
 
 import christmas.contents.ContentNumbers;
 import christmas.contents.MenuCatalog;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -44,7 +43,7 @@ public class ValidationUtil {
         validateOrderFormat(inputOrder);
     }
 
-    private static void validateOrderFormat(String inputOrder) {
+    public static void validateOrderFormat(String inputOrder) {
         Arrays.stream(inputOrder.split(ITEM_SEPARATOR.getMessage()))
                 .map(item -> item.split(QUANTITY_SEPARATOR.getMessage()))
                 .forEach(parts -> {
@@ -54,7 +53,7 @@ public class ValidationUtil {
                 });
     }
 
-    private static void validateDuplicateMenu(String orderInput) {
+    public static void validateDuplicateMenu(String orderInput) {
         Map<MenuCatalog, Long> menuFrequency = Stream.of(orderInput.split(ITEM_SEPARATOR.getMessage()))
                 .map(item -> item.split(QUANTITY_SEPARATOR.getMessage()))
                 .filter(parts -> parts.length == ORDER_PARTS_COUNT.getValue())
@@ -75,13 +74,13 @@ public class ValidationUtil {
         validateTotalOrderQuantity(orderMap);
     }
 
-    private static void validateNonExistentMenu(Map<MenuCatalog, Integer> orderMap) {
+    public static void validateNonExistentMenu(Map<MenuCatalog, Integer> orderMap) {
         if (orderMap.containsKey(MenuCatalog.NONE)) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
-    private static void validateQuantityRange(Map<MenuCatalog, Integer> orderMap) {
+    public static void validateQuantityRange(Map<MenuCatalog, Integer> orderMap) {
         orderMap.values().forEach(quantity -> {
             if (quantity < MIN_QUANTITY.getValue() || quantity > MAX_QUANTITY.getValue()) {
                 throw new IllegalArgumentException(INVALID_ORDER.getMessage());
@@ -98,7 +97,7 @@ public class ValidationUtil {
     }
 
 
-    private static void validateDuplicateMenu(Map<MenuCatalog, Integer> orderMap) {
+    public static void validateDuplicateMenu(Map<MenuCatalog, Integer> orderMap) {
         List<MenuCatalog> originalOrderList = new ArrayList<>(orderMap.keySet());
         Set<MenuCatalog> uniqueMenus = new HashSet<>(originalOrderList);
         if (originalOrderList.size() != uniqueMenus.size()) {
@@ -106,7 +105,7 @@ public class ValidationUtil {
         }
     }
 
-    private static void validateDrinksOnlyOrder(Map<MenuCatalog, Integer> orderMap) {
+    public static void validateDrinksOnlyOrder(Map<MenuCatalog, Integer> orderMap) {
         boolean onlyDrinks = orderMap.keySet().stream()
                 .allMatch(MenuCatalog::isDrink);
         if (onlyDrinks) {

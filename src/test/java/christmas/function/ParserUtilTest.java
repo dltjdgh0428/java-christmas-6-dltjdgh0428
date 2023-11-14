@@ -6,6 +6,8 @@ import christmas.contents.MenuCatalog;
 import christmas.utils.ParserUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Map;
 
@@ -60,6 +62,14 @@ class ParserUtilTest {
         assertEquals(1, result.get(MenuCatalog.RED_WINE));
         assertEquals(3, result.get(MenuCatalog.T_BONE_STEAK));
         assertEquals(3, result.get(MenuCatalog.CAESAR_SALAD));
+    }
+
+    @DisplayName("유효한 날짜 파싱")
+    @ValueSource(strings = {"1", "15", "31"})
+    @ParameterizedTest
+    void testParseValidDate(String validDateInput) {
+        int result = ParserUtil.parseDate(validDateInput);
+        assertEquals(Integer.parseInt(validDateInput), result);
     }
 }
 

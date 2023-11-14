@@ -7,25 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import christmas.Application;
 import christmas.contents.MenuCatalog;
-import christmas.domain.Date;
 import christmas.domain.vo.OrderVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class OrderTest extends NsTest {
-
-    @Test
-    @DisplayName("Domain 날짜 객체 생성 및 값 반환 테스트")
-    void createDateAndReturnValue() {
-        // given
-        int testDay = 15;
-
-        // when
-        Date date = new Date(testDay);
-
-        // then
-        assertEquals(testDay, date.getDay());
-    }
 
     @Test
     @DisplayName("유효하지 않은 주문 형식은 예외 발생")
@@ -155,28 +143,12 @@ public class OrderTest extends NsTest {
         });
     }
 
-    @Test
-    @DisplayName("유효하지 않은 입력 예외 처리 출력 확인1")
-    void invalidInputFormatExceptionTest_1() {
+    @DisplayName("유효하지 않은 입력 예외 처리 출력 확인")
+    @ValueSource(strings = {"제로콜라_3", "티본스테이크--3", "티본스테이크-30"})
+    @ParameterizedTest
+    void invalidInputExceptionTest(String orderInput) {
         assertSimpleTest(() -> {
-            runException("3", "제로콜라_3");
-            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        });
-    }
-    @Test
-    @DisplayName("초과 입력 예외 처리 출력 확인")
-    void orderQuantityExceededExceptionTest() {
-        assertSimpleTest(() -> {
-            runException("3", "티본스테이크-30");
-            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        });
-    }
-
-    @Test
-    @DisplayName("유효하지 않은 입력 예외 처리 출력 확인2")
-    void invalidInputFormatExceptionTest_2() {
-        assertSimpleTest(() -> {
-            runException("3", "티본스테이크--3");
+            runException("3", orderInput);
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }

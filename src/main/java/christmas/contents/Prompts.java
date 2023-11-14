@@ -28,7 +28,7 @@ public enum Prompts {
         return message;
     }
 
-    public String getDayMessage(int day){
-        return String.format(EVENT_BENEFIT_PREVIEW.message,day);
+    public String getDayMessage(int day) {
+        return String.format(EVENT_BENEFIT_PREVIEW.message, day);
     }
 }

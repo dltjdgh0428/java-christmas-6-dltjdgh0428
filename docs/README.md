@@ -70,9 +70,9 @@
 ````
 │
 ├── domain
-│   ├── Date.java                      // 방문 날짜를 나타내는 클래스
 │   ├── Order.java                     // 주문을 나타내는 클래스
 │   ├── DiscountPolicy.java            // 할인 정책을 나타내는 Enum 클래스
+│   ├── DiscountDetails.java           // 할인 관련 세부정보를 나타내는 클래스
 │   ├── EventBadge.java                // 이벤트 배지를 나타내는 Enum 클래스
 │   └── vo
 │       ├── OrderVo.java               // 메뉴 수량의 유효성 검증을 하는 VO
@@ -105,5 +105,6 @@
     ├── Prompts.java                   // 출력 메세지를 관리하는 Enum 클래스
     ├── MenuType.java                  // 메뉴 분류를 관리하는 Enum 클래스
     ├── DiscountAmounts.java           // 할인 정책의 금액을 관리하는 Enum 클래스
+    ├── OutputFormat.java              // 할인금액의 출력을 도와주는 Enum 클래스
     └── MenuCatalog.java               // 메뉴 목록을 관리하는 Enum 클래스
 ````

@@ -4,7 +4,6 @@ import christmas.contents.OutputFormat;
 import christmas.contents.Prompts;
 import christmas.domain.DiscountDetails;
 import christmas.dto.OrderDTO;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +29,7 @@ public class OutputView {
 
     public void printTotalOrderAmountBeforeDiscount(int totalBeforeDiscount) {
         System.out.println(Prompts.TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.getMessage());
-        System.out.println(OutputFormat.getPositiveInt(totalBeforeDiscount));
+        System.out.println(OutputFormat.getPaymentFormat(totalBeforeDiscount));
         System.out.println(Prompts.SPACE.getMessage());
     }
 
@@ -58,13 +57,13 @@ public class OutputView {
 
     public void printTotalBenefitAmount(int totalDiscount) {
         System.out.println(Prompts.TOTAL_BENEFIT_AMOUNT.getMessage());
-        System.out.println(OutputFormat.getNegativeInt(totalDiscount));
+        System.out.println(OutputFormat.getBenefitNumberFormat(totalDiscount));
         System.out.println(Prompts.SPACE.getMessage());
     }
 
     public void printExpectedPaymentAfterDiscount(int payment) {
         System.out.println(Prompts.EXPECTED_PAYMENT_AFTER_DISCOUNT.getMessage());
-        System.out.println(OutputFormat.getPositiveInt(payment));
+        System.out.println(OutputFormat.getPaymentFormat(payment));
         System.out.println(Prompts.SPACE.getMessage());
     }
 
