@@ -35,7 +35,7 @@ public class OutputView {
 
     public void printGiftMenu(boolean giftChampagne) {
         Map<Boolean, String> messageMap = new HashMap<>();
-        messageMap.put(true, Prompts.Champagne.getMessage());
+        messageMap.put(true, Prompts.CHAMPAGNE.getMessage());
         messageMap.put(false, Prompts.NOTHING.getMessage());
 
         System.out.println(Prompts.GIFT_MENU.getMessage());

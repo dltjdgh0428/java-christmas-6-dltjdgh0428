@@ -8,7 +8,7 @@ public enum DiscountAmounts {
     GIFT_EVENT_DISCOUNT_AMOUNT(25_000),
     GIFT_EVENT_THRESHOLD(120_000),
     MINIMUM_ORDER_AMOUNT_FOR_DISCOUNTS(10_000),
-    NO_DISCOUNT(0); // 예시 금액
+    NO_DISCOUNT(0);
 
     private final int amount;
 

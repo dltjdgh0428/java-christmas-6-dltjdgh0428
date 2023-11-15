@@ -13,7 +13,7 @@ public enum Prompts {
     EXPECTED_PAYMENT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
     EVENT_BADGE("<12월 이벤트 배지>"),
     NOTHING("없음"),
-    Champagne("샴페인 1개"),
+    CHAMPAGNE("샴페인 1개"),
     SPACE(""),
     ITEM_SEPARATOR(","),
     QUANTITY_SEPARATOR("-");
